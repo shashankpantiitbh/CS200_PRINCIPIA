@@ -199,6 +199,143 @@ app.get('/auth/facebook/intro',
 
   });
 
+app.get("/", function (req, res) {
+  const error = ""
+  res.render("login", { errorMessage: error });
+})
+
+app.get("/booking", function (req, res) {
+  res.render("booking", { QuestionsArray: Questions });
+})
+app.get("/Form", function (req, res) {
+  res.render("Form");
+})
+app.get("/Book_status", function (req, res) {
+  if (req.isAuthenticated()) {
+    // User is authenticated
+
+    // Access the user's username from the session
+    const username = req.user.username; // Assuming you've stored the username in the user session
+
+    // Use the username to find the user's booking information
+    Booking.findOne({ Email: username }) // Assuming 'Email' is the field that stores the user's email in the booking collection
+      .then((booking) => {
+        if (booking) {
+          // User has booking information
+          res.render("Book_status", {
+            Name: booking.Name,
+            Email: booking.Email,
+            ContactNo: booking.ContactNo,
+            Domain: booking.Domain,
+            AadharNo: booking.AadharNo,
+          });
+        } else {
+          // No booking found for the user
+          res.render("Book_status", {
+            Name: "No Booking Found",
+            Email: "No Booking Found",
+            ContactNo: "No Booking Found",
+            Domain: "No Booking Found",
+            AadharNo: "No Booking Found",
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error finding booking:", error);
+        res.status(500).send("Internal Server Error");
+      });
+  } else {
+    // User is not authenticated, redirect them to the login page or handle the case as needed
+    res.redirect("/login"); // Replace with your login route
+  }
+});
+
+app.post("/booking", function (req, res) {
+  res.redirect("/Form");
+})
+app.post("/Form",function(req,res)
+{
+  const Entry = new Booking({
+   Name: req.body.name,
+
+    Email: req.body.email,
+       
+    ContactNo:req.body.contact,
+    Domain:req.body.Domain,
+    AadharNo:req.body.aadharNo
+
+  });
+  Entry.save()
+  .then((result) => {
+const name=req.body.name;
+const email=req.body.email;
+const contact=req.body.contact;
+const domain=req.body.Domain;
+const adhaar=req.body.aadharNo;
+    res.render("Book_status",{Name:name, Email:email,   ContactNo:contact, Domain:domain,
+      AadharNo:adhaar});
+  })
+})
+app.post("/login", function (req, res, next) {
+  if(req.body.action==='login'){
+  const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+
+  });
+  req.session.username = req.user.username;
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+
+    if (!user) {
+      // Authentication failed, display error message
+      res.render("login", { errorMessage: "Invalid username or password." });
+    } else {
+      req.login(user, function (err) {
+        if (err) {
+          console.log(err);
+          return next(err);
+        }
+
+        res.redirect("/Booking");
+      });
+    }
+  })(req, res, next);
+}
+
+
+else {
+  User.findOne({ username: req.body.username })
+    .then((foundUser) => {
+      if (foundUser) {
+
+        res.render("login", { errorMessage: "User already exists." });
+      } else {
+        User.register(
+          {
+            username: req.body.username,
+            active: false,
+
+          },
+          req.body.password,
+          function (err, user) {
+            if (err) {
+              console.log(err);
+              res.redirect("/");
+            } else {
+              passport.authenticate("local")(req, res, function () {
+                res.redirect("/Booking");
+              });
+            }
+          }
+        );
+      }
+    })
+}});
+
 
 
 app.listen(3000, function () {
