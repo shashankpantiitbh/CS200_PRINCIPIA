@@ -82,7 +82,7 @@ body {
   animation: gradient-animation 18s ease infinite;
 }
 .navbar{
-  background-color: lightskyblue;
+  background-color: black;
 }
 @keyframes gradient-animation {
   0% {
@@ -282,4 +282,8 @@ background-color: purple;
 .educlasses{
   width:150px;
   height:150px;
+}
+.edit{
+  border-radius: 15px;
+  border : 4px solid white;
 }

@@ -152,7 +152,7 @@ app.get("/auth/google/callback"//authorized redirective uri from google cloud
   , passport.authenticate('google', { failureRedirect: '/' }),//redirect to login page if authentication fails
   function (req, res) {
     // Successful authentication, redirect intro.
-    res.redirect("/");
+    res.redirect("/Booking");
   });//after login success if auth/google route google makes a get request to this route
 //here er authenicate user locally and save their logged in session and once  they are authentictaed successfull tthen we redirect them to
 //intro route
@@ -164,7 +164,7 @@ app.get('/auth/facebook/intro',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/intro');
+    res.redirect('/Booking');
 
   });
 
@@ -174,7 +174,7 @@ app.get("/", function (req, res) {
 })
 
 app.get("/booking", function (req, res) {
-  res.render("booking", { QuestionsArray: Questions });
+  res.render("booking");
 })
 app.get("/Form", function (req, res) {
   res.render("Form");
@@ -236,6 +236,38 @@ app.post("/Form",function(req,res)
   });
   Entry.save()
   .then((result) => {
+ 
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: "shashankpant94115@gmail.com",
+          pass: 'kizh zeyf ljig noqb'
+        }
+      });
+
+      var mailOptions = {
+        from: 'shashankpant94115@gmail.com',
+        to: req.body.email,
+        subject: 'Regarding Ticket Booking',
+        html: '<html>' +
+          '<body>' +
+          '<h1 style="color: #336699;">Thank you, we have received your response!</h1>' +
+          '<p style="color: #333;">With Regards,</p>' +
+          '<p style="color: #333;">TickUp</p>' +
+        
+          '</body>' +
+          '</html>'
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+
 const name=req.body.name;
 const email=req.body.email;
 const contact=req.body.contact;
@@ -252,7 +284,7 @@ app.post("/login", function (req, res, next) {
     password: req.body.password,
 
   });
-  req.session.username = req.user.username;
+  // req.session.username = req.user.username;
   passport.authenticate("local", function (err, user, info) {
     if (err) {
       console.log(err);
