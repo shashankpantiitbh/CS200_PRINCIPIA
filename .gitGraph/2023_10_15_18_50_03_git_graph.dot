@@ -1,0 +1,40 @@
+digraph auto {
+	graph [bgcolor=transparent]
+	node [fixedsize=true style=filled width=0.95]
+	"4b5109bf6c35639b27fac9b3296e36b2dbbd22fc" [label="4b5109b" fillcolor="#9ccc66"]
+	"53cfbf2c34672756060c23d980da7206b64aa4ff" [label="53cfbf2" fillcolor="#9ccc66"]
+	"9915655179180e6c6ef42403d303025422b6b695" [label=9915655 fillcolor="#9ccc66"]
+	"5a5ef5729b6bf8bb33bc703737f183804087229a" [label="5a5ef57" fillcolor="#bc9b8f"]
+	"5a5ef5729b6bf8bb33bc703737f183804087229a" -> "53cfbf2c34672756060c23d980da7206b64aa4ff"
+	a40572e1e0da5ff7707c486a9e0f43171e4f269c [label=a40572e fillcolor="#bc9b8f"]
+	a40572e1e0da5ff7707c486a9e0f43171e4f269c -> "9915655179180e6c6ef42403d303025422b6b695"
+	a864f2c50842ba500c0576cffaaa958f8e423064 [label=a864f2c fillcolor="#bc9b8f"]
+	a864f2c50842ba500c0576cffaaa958f8e423064 -> "53cfbf2c34672756060c23d980da7206b64aa4ff"
+	a864f2c50842ba500c0576cffaaa958f8e423064 -> "4b5109bf6c35639b27fac9b3296e36b2dbbd22fc"
+	c8b2be9b2a6eccdcdc099e9d8fa10cc63cd47d25 [label=c8b2be9 fillcolor="#bc9b8f"]
+	c8b2be9b2a6eccdcdc099e9d8fa10cc63cd47d25 -> "53cfbf2c34672756060c23d980da7206b64aa4ff"
+	c8b2be9b2a6eccdcdc099e9d8fa10cc63cd47d25 -> "4b5109bf6c35639b27fac9b3296e36b2dbbd22fc"
+	c8b2be9b2a6eccdcdc099e9d8fa10cc63cd47d25 -> a40572e1e0da5ff7707c486a9e0f43171e4f269c
+	"7fb52764a30dcb49d3785adba9500bcad26fc02f" [label="7fb5276" fillcolor="#85d5fa"]
+	"7fb52764a30dcb49d3785adba9500bcad26fc02f" -> c8b2be9b2a6eccdcdc099e9d8fa10cc63cd47d25
+	"7fb52764a30dcb49d3785adba9500bcad26fc02f" -> "985edbd8552477a6d66c120c2d8cb2fd18ba0008"
+	"93a45c17f3d64dd714c2343642c927b71da2e560" [label="93a45c1" fillcolor="#85d5fa"]
+	"93a45c17f3d64dd714c2343642c927b71da2e560" -> "5a5ef5729b6bf8bb33bc703737f183804087229a"
+	"985edbd8552477a6d66c120c2d8cb2fd18ba0008" [label="985edbd" fillcolor="#85d5fa"]
+	"985edbd8552477a6d66c120c2d8cb2fd18ba0008" -> a864f2c50842ba500c0576cffaaa958f8e423064
+	"985edbd8552477a6d66c120c2d8cb2fd18ba0008" -> "93a45c17f3d64dd714c2343642c927b71da2e560"
+	frontend [label=fronten fillcolor="#9999ff"]
+	frontend -> "7fb52764a30dcb49d3785adba9500bcad26fc02f"
+	main [label=main fillcolor="#9999ff"]
+	main -> "985edbd8552477a6d66c120c2d8cb2fd18ba0008"
+	HEAD [label=HEAD fillcolor="#e6ccff"]
+	HEAD -> frontend
+	"origin/main" [label=main fillcolor="#ffa366"]
+	"origin/main" -> "985edbd8552477a6d66c120c2d8cb2fd18ba0008"
+	"origin/HEAD" [label=HEAD fillcolor="#ffbeb3"]
+	"origin/HEAD" -> "origin/main"
+	origin [label=origin fillcolor="#ff6666"]
+	origin -> "origin/main"
+	origin -> "origin/HEAD"
+	"origin/main" -> main
+}

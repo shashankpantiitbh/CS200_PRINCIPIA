@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+<main class="form-signin h-50 w-70 m-auto">
+    <div class="card">
+      <div class="card-body ">
+        
+      <h2>Ticket Booking</h2>
+      <form action="/Form" method="POST" >
+   
+     
+    
+        <div class="form-group mt-4">
+          <label for="name">Name:</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group mt-4">
+          <label for="email">Email:</label>
+        <input type="email" class="form-control"name="email"id="email"required>
+        </div>
+    
+        <div class="form-group mt-4">
+          <label for="contact">Contact No:</label>
+         <input type="number" name="contact"  class="form-control"id="contact" maxlength="10" pattern="\d{10}"placeholder="Enter Mobile No"> 
+        </div>
+    
+       
+      
+            
+     
+        <div class="form-group mt-4">
+          <label for="domain">Domain:</label>
+          <input type="text" class="form-control" id="Domain" name="Domain" value=" " required >
+          
+        </div>
+        <div class="form-group">
+          <label for="aadharNo">Aadhar No.:</label>
+          <input type="number" id="aadharNo" name="aadharNo"minlength="12" maxlength="12" placeholder="Enter twelve digits" required>
+        </div>
+         
+       
+    
+      
+    
+      
+    <button type="submit" class="btn btn-success mt-4" >Book Ticket</button>
+      </form>
+    </div></div>
+  </main>
+  <script>
+    <!-- document.addEventListener('DOMContentLoaded', function () {
+      // Fetch the batch value from the server-side (replace 'YOUR_BATCH_VALUE' with the actual batch value)
+   // Replace 'YOUR_BATCH_VALUE' with the actual batch value coming from the server-side -->
+  
+      // Get the amount input field
+      var amountField = document.getElementById('amount');
+  
+      // Function to calculate the amount based on the batch value
+      function calculateAmount(batch) {
+        switch (batch) {
+          case '8th':
+            return '500';
+          case '9th':
+          case '10th':
+            return '600';
+          case '11th':
+          case '12th':
+            return '700';
+          default:
+            return ''; // Handle the case when batch value is unknown or not specified
+        }
+      }
+  
+      // Calculate and set the amount based on the batch value
+      var calculatedAmount = calculateAmount(batch);
+      amountField.value = calculatedAmount;
+      amountField.readOnly = true; // Make the amount field readonly
+    }); -->
+  </script>
+  
