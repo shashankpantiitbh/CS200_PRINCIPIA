@@ -19,42 +19,13 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const multer = require('multer');
 
 const https = require("https");
-const sharp = require('sharp');
+
 
 
 const FacebookStrategy = require('passport-facebook');
 
 
 const cron = require('node-cron');
-
-
-
-
-// For this example to work, you need to set up a sending domain,
-// and obtain a token that is authorized to send from the domain
-
-// Assuming you have a buffer named 'bufferData'
-
-
-
-const storage = multer.memoryStorage({
-  destination: function (req, file, cb) {
-    return cb(null, "uploads");
-    //cb coinatins two fields err and folder name
-  },//tells destiantion of storing images,file is user uploaded and cb is callback fxn when task execute 
-  filename: function (req, file, cb) {
-    return cb(null, `${Date.now()}-${file.originalname}`)//err is null// appends date with file name to avoid creating and replacing file with same name
-  }
-})
-
-const upload = multer({ storage })
-
-const Questions = [];
-
-
-
-//Image is a model which has a schema imageSchema
-
 
 
 
@@ -69,9 +40,7 @@ app.set("views", path.resolve("./views"))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 
-const SerpApi = require("google-search-results-nodejs");
-const { builtinModules } = require("module");
-const search = new SerpApi.GoogleSearch(process.env.API_KEY);
+
 
 
 
